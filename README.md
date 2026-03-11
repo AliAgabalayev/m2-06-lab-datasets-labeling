@@ -16,7 +16,7 @@ By the end of this lab you should be able to:
 - Apply a deterministic partitioning scheme so that every contributor works on a unique, non-overlapping subset.
 - Convert bounding-box annotations between coordinate formats (Open Images corners to YOLO center-width-height).
 - Run automated quality checks on a labeled dataset before submission.
-- Reflect on dataset bias, tricky labeling cases, and how feedback loops affect downstream model quality.
+- Reflect on dataset bias and tricky labeling cases.
 
 ## Prerequisites
 
@@ -133,7 +133,7 @@ python download_images.py \
 
 Images are saved as `images/<ImageID>.jpg`. The script skips images that already exist locally (safe to re-run) and reports any failed downloads at the end.
 
-**If a download fails:** Note the failed ImageID in your report (Step 8). You can still proceed — the verification script in Step 7 will flag missing images.
+**If a download fails:** You can still proceed — the verification script in Step 7 will flag missing images.
 
 ---
 
@@ -194,30 +194,6 @@ Fix any issues it reports before proceeding to submission.
 
 ---
 
-## Step 8: Write your analysis report
-
-Create a short report (3–4 pages, PDF or Markdown) that includes:
-
-**Dataset metadata:**
-- Your student ID, rank, and class size (N)
-- Number of images downloaded and labeled successfully
-- Total time spent (rough estimate)
-
-**Tricky cases (5–10 examples):**
-- Pick 5–10 images where the labeling is ambiguous or interesting (e.g., partially occluded cats, very small cats, cats in unusual poses). For each, describe what makes it tricky and what the Open Images annotation chose to do.
-
-**Bias analysis:**
-- What contexts, backgrounds, or cat breeds dominate your 100-image slice?
-- What is underrepresented or missing entirely?
-- If a model were trained only on your slice, what would it likely get wrong?
-
-**Feedback loop reflection:**
-- Imagine this dataset is deployed in a cat-detection product. Users can flag incorrect detections. How would that feedback improve the next version of the dataset? What is the feedback loop length?
-
-Save the report as `report.pdf` (or `report.md`).
-
----
-
 ## Submission
 
 This lab has **two** submission steps — a Pull Request for AI grading and a Google Drive upload for the shared class dataset.
@@ -252,7 +228,6 @@ Your folder must have this exact structure:
   labels/
     <ImageID>.txt       (100 label files, one per image)
   my_imageids.txt       (your 100 ImageIDs)
-  report.pdf            (your analysis report)
 ```
 
 Every image must have a matching label file, even if the label file is empty.
@@ -265,11 +240,10 @@ Before you submit, make sure:
 - [ ] Your `images/` folder contains exactly 100 `.jpg` files.
 - [ ] Your `labels/` folder contains exactly 100 `.txt` files.
 - [ ] Your `my_imageids.txt` contains at least 100 ImageIDs (one per line, sorted).
-- [ ] Your report covers all four sections (metadata, tricky cases, bias analysis, feedback loop).
 - [ ] Your `my_imageids.txt` is committed to your repo and included in your Pull Request.
 - [ ] You have pasted the PR link in the Student Portal.
-- [ ] Your Google Drive folder is named with your student ID and contains images, labels, `my_imageids.txt`, and `report.pdf`.
+- [ ] Your Google Drive folder is named with your student ID and contains images, labels, and `my_imageids.txt`.
 
 ## Evaluation Criteria
 
-Your work will be evaluated on completeness, correctness, and analysis quality. **Completeness** means all 100 images and labels are present in Google Drive and the verification script passes. **Correctness** means your YOLO labels are properly formatted and your ImageID partition is deterministic and non-overlapping. **Analysis quality** means your report provides thoughtful observations about tricky cases, bias, and feedback loops — not just surface-level descriptions.
+Your work will be evaluated on completeness and correctness. **Completeness** means all 100 images and labels are present in Google Drive and the verification script passes. **Correctness** means your YOLO labels are properly formatted, your ImageID partition is deterministic and non-overlapping, and your `my_imageids.txt` contains at least 100 valid IDs.
